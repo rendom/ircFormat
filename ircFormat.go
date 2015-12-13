@@ -46,12 +46,14 @@ func New(s string) *IrcText {
 	return &IrcText{text: s, bgColor: none, fgColor: none}
 }
 
-func (i *IrcText) setFg(c int) *IrcText {
+// SetFg sets foreground color
+func (i *IrcText) SetFg(c int) *IrcText {
 	i.fgColor = c
 	return i
 }
 
-func (i *IrcText) setBg(c int) *IrcText {
+// SetBg sets background color
+func (i *IrcText) SetBg(c int) *IrcText {
 	i.bgColor = c
 	return i
 }
