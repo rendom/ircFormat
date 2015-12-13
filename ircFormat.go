@@ -23,12 +23,12 @@ const (
 )
 
 const (
-	resetFormatChar = "\x0F"
-	boldChar        = "\x02"
-	italicChar      = "\x1D"
-	underlineChar   = "\x1F"
-	swapChar        = "\x16"
-	colorChar       = "\x03"
+	ResetFormatDelim = "\x0F"
+	BoldDelim        = "\x02"
+	ItalicDelim      = "\x1D"
+	UnderlineDelim   = "\x1F"
+	SwapDelim        = "\x16"
+	ColorDelim       = "\x03"
 )
 
 type IrcText struct {
@@ -58,24 +58,80 @@ func (i *IrcText) SetBg(c int) *IrcText {
 	return i
 }
 
+// Bold text
+func (i *IrcText) SetBold() *IrcText {
+	i.bold = true
+	return i
+}
+
+// Italic text
+func (i *IrcText) SetItalic() *IrcText {
+	i.italic = true
+	return i
+}
+
+// Underline text
+func (i *IrcText) SetUnderline() *IrcText {
+	i.underline = true
+	return i
+}
+
 func (i *IrcText) String() string {
-	if i.bgColor == None && i.fgColor == None {
-		return i.text
+	c := i.text
+
+	if i.underline {
+		c = UnderlineText(c)
 	}
 
-	c := colorChar
-
-	if i.fgColor != None {
-		c += strconv.Itoa(i.fgColor)
+	if i.bold {
+		c = BoldText(c)
 	}
 
-	if i.bgColor != None {
-		c += ","
-		c += strconv.Itoa(i.bgColor)
+	if i.italic {
+		c = ItalicText(c)
 	}
 
-	c += i.text
-	c += colorChar
+	if i.bgColor != None || i.fgColor != None {
+		c = ColorizeText(c, i.fgColor, i.bgColor)
+	}
 
 	return c
+}
+
+func ColorizeText(text string, fg int, bg int) string {
+	if fg == None && bg == None {
+		return text
+	}
+
+	c := ColorDelim
+
+	if fg != None {
+		c += strconv.Itoa(fg)
+	}
+
+	if bg != None {
+		c += ","
+		c += strconv.Itoa(bg)
+	}
+
+	c += text
+	c += ColorDelim
+
+	return c
+}
+
+func UnderlineText(text string) string {
+	return wrapText(text, UnderlineDelim)
+}
+
+func BoldText(text string) string {
+	return wrapText(text, BoldDelim)
+}
+
+func ItalicText(text string) string {
+	return wrapText(text, ItalicDelim)
+}
+
+func wrapText(text string, delim string) string {
+	return delim + text + delim
 }
