@@ -3,23 +3,23 @@ package ircFormat
 import "strconv"
 
 const (
-	white = iota
-	black
-	blue
-	green
-	red
-	brown
-	purple
-	orange
-	yellow
-	lime
-	teal
-	cyan
-	darkblue
-	pink
-	grey
-	lightgrey
-	none
+	White = iota
+	Black
+	Blue
+	Green
+	Red
+	Brown
+	Purple
+	Orange
+	Yellow
+	Lime
+	Teal
+	Cyan
+	Darkblue
+	Pink
+	Grey
+	Lightgrey
+	None
 )
 
 const (
@@ -43,7 +43,7 @@ type IrcText struct {
 
 // New creates IrcText object and take your text as argument.
 func New(s string) *IrcText {
-	return &IrcText{text: s, bgColor: none, fgColor: none}
+	return &IrcText{text: s, bgColor: None, fgColor: None}
 }
 
 // SetFg sets foreground color
@@ -59,17 +59,17 @@ func (i *IrcText) SetBg(c int) *IrcText {
 }
 
 func (i *IrcText) String() string {
-	if i.bgColor == none && i.fgColor == none {
+	if i.bgColor == None && i.fgColor == None {
 		return i.text
 	}
 
 	c := colorChar
 
-	if i.fgColor != none {
+	if i.fgColor != None {
 		c += strconv.Itoa(i.fgColor)
 	}
 
-	if i.bgColor != none {
+	if i.bgColor != None {
 		c += ","
 		c += strconv.Itoa(i.bgColor)
 	}
