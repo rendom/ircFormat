@@ -52,17 +52,17 @@ func TestUnderlineText(t *testing.T) {
 	text := "test"
 	expect := fmt.Sprintf("\x1F%s\x1F", text)
 
-	c := UnderlineText(text)
+	c := Underline(text)
 	if c != expect {
 		t.Fatalf("Got %q, expected %q", c, expect)
 	}
 }
 
-func TestBoldText(t *testing.T) {
+func TestBold(t *testing.T) {
 	text := "test"
 	expect := fmt.Sprintf("\x02%s\x02", text)
 
-	c := BoldText(text)
+	c := Bold(text)
 	if c != expect {
 		t.Fatalf("Got %q, expected %q", c, expect)
 	}
@@ -72,7 +72,7 @@ func TestItalicText(t *testing.T) {
 	text := "test"
 	expect := fmt.Sprintf("\x1D%s\x1D", text)
 
-	c := ItalicText(text)
+	c := Italic(text)
 	if c != expect {
 		t.Fatalf("Got %q, expected %q", c, expect)
 	}

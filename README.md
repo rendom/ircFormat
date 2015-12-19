@@ -12,17 +12,17 @@ https://godoc.org/github.com/rendom/ircFormat
 i.Privmsg(CHAN, ircFormat.New("Test").SetBold().SetFg(ircFormat.Red));
 
 // Bold text
-i.Privmsg(CHAN, ircFormat.BoldText("Test!"));
+i.Privmsg(CHAN, ircFormat.Bold("Test!"));
 
 // Italic text
-i.Privmsg(CHAN, ircFormat.ItalicText("Test!"));
+i.Privmsg(CHAN, ircFormat.Italic("Test!"));
 
 // Underline text
-i.Privmsg(CHAN, ircFormat.UnderlineText("Test!"));
+i.Privmsg(CHAN, ircFormat.Underline("Test!"));
 
 // Red text
-i.Privmsg(CHAN, ircFormat.ColorizeText("Test!", ircFormat.Red, ircFormat.None));
+i.Privmsg(CHAN, ircFormat.Colorize("Test!", ircFormat.Red, ircFormat.None));
 
 // Red text with green background
-i.Privmsg(CHAN, ircFormat.ColorizeText("Test!", ircFormat.Red, ircFormat.Green));
+i.Privmsg(CHAN, ircFormat.Colorize("Test!", ircFormat.Red, ircFormat.Green));
 ```

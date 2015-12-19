@@ -80,25 +80,25 @@ func (i *IrcText) String() string {
 	c := i.text
 
 	if i.underline {
-		c = UnderlineText(c)
+		c = Underline(c)
 	}
 
 	if i.bold {
-		c = BoldText(c)
+		c = Bold(c)
 	}
 
 	if i.italic {
-		c = ItalicText(c)
+		c = Italic(c)
 	}
 
 	if i.bgColor != None || i.fgColor != None {
-		c = ColorizeText(c, i.fgColor, i.bgColor)
+		c = Colorize(c, i.fgColor, i.bgColor)
 	}
 
 	return c
 }
 
-func ColorizeText(text string, fg int, bg int) string {
+func Colorize(text string, fg int, bg int) string {
 	if fg == None && bg == None {
 		return text
 	}
@@ -120,15 +120,15 @@ func ColorizeText(text string, fg int, bg int) string {
 	return c
 }
 
-func UnderlineText(text string) string {
+func Underline(text string) string {
 	return wrapText(text, UnderlineDelim)
 }
 
-func BoldText(text string) string {
+func Bold(text string) string {
 	return wrapText(text, BoldDelim)
 }
 
-func ItalicText(text string) string {
+func Italic(text string) string {
 	return wrapText(text, ItalicDelim)
 }
 
